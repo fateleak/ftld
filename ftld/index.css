@@ -67,3 +67,8 @@ html, body{
     font-weight: bold;
 
 }
+
+#result_area{
+    overflow: scroll;
+    height: calc(100vh - 50px);
+}
