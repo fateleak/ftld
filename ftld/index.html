@@ -26,9 +26,21 @@
 <body>
   <div id="window_header" class="drag no-selection">
 
-      <button id="btn_execute">Execute</button> 
-      <a >Cache</a> <input type="checkbox" class="autobind" id="check_with_cache" dft="true" />
-  
+    <div>
+      <button id="btn_execute">Execute</button>
+    </div>
+    <div>
+      <a>Cache</a> <input type="checkbox" class="autobind" id="check_with_cache" dft="true" />
+    </div>
+
+    <div>
+        <a>Show NA</a> <input type="checkbox" class="autobind" id="show_na" dft="true" />
+    </div>
+    <div>
+      <span id="msg"></span>
+    </div>
+
+
   </div>
 
   <div id="total">
@@ -37,14 +49,14 @@
     </div>
 
     <div id="postfix_area" class="input-column">
-        <textarea class="autobind"  id="postfix_data" dft="core">core</textarea>
-      </div>
-
-    <div id="tld_area" class="input-column">
-        <textarea class="autobind"  id="tld_data" dft=".com">.com</textarea>
+      <textarea class="autobind" id="postfix_data" dft="core">core</textarea>
     </div>
 
-    <pre id="result_area"></pre>
+    <div id="tld_area" class="input-column">
+      <textarea class="autobind" id="tld_data" dft=".com">.com</textarea>
+    </div>
+
+    <div id="result_area"></div>
   </div>
 
 

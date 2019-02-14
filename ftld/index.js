@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
   databind.autobind()
 
   $('#btn_execute').click(on_click_execute)
+
+  setInterval(tick, 1000)
 })
 
 function open_win(win_name) {
@@ -29,6 +31,10 @@ function open_win(win_name) {
 }
 
 const ftld = require('./ftld')
+let g_total_progress = 0
+let g_current_progress = 0
+let g_cache = store.get("cache", {})
+console.log('cache=', g_cache)
 function on_click_execute() {
   console.log('exec')
 
@@ -38,25 +44,68 @@ function on_click_execute() {
   pre = pre.split('\n')
   post = post.split('\n')
   tlds = tlds.split('\n')
-
   console.log(pre, post, tlds)
+  $('#result_area').empty()
+
+  let with_cache = $('#check_with_cache').prop('checked')
+  if (!with_cache) {
+    g_cache = {}
+  }
+
+  g_total_progress = 0
+  g_current_progress = 0
   pre.forEach(a => {
     post.forEach(b=>{
       tlds.forEach(c=>{
         let dm = `${a}${b}${c}`
-        ftld.check_domain(dm, on_domain_result)
+        if (dm in g_cache) {
+          on_domain_result(g_cache[dm], dm, '', true)
+        } else {
+          ftld.check_domain(dm, on_domain_result)
+          g_total_progress += 1
+        }
       })
     })
   });
+  refresh_progress()
+}
+function refresh_progress () {
 
+  $('#msg').text(`${g_current_progress}/${g_total_progress}`)
 }
 
-function on_domain_result(is_avaliable, domain, whois) {
+function re_check(domain) {
+  console.log(domain)
+  ftld.check_domain(domain, on_domain_result)
+  g_total_progress += 1
+}
+
+function on_domain_result(is_avaliable, domain, whois, is_cache=false) {
   
-  let ele_text = `<span>${is_avaliable?'AA': 'NA'} ${domain}  ${whois?whois.substring(0, 20).trim():'empty'}
-  </span>
+  let ele_text = `<div>${is_avaliable?'AA': 'NA'} 
+  <a href="http://${domain}" target="_blank">${domain}</a> ${is_cache?'CACHE':'' } ${whois?whois.substring(0, 20).trim():''} 
+
+  <button href="#" class="recheck">RE</button>
+  </div>
   `
-  if (is_avaliable) {
-  $('#result_area').append($(ele_text))
+  if (!is_cache) {
+    g_cache[domain] = is_avaliable
+    store.set("cache", g_cache)
+    g_current_progress += 1
+
+    refresh_progress()
   }
+
+
+  let show_na = $('#show_na').prop('checked')
+  if (is_avaliable || show_na) {
+    let ele = $(ele_text)
+    ele.find('.recheck').click(re_check.bind(null, domain))
+    $('#result_area').prepend(ele)
+  }
+}
+
+
+function tick() {
+
 }

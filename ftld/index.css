@@ -47,6 +47,10 @@ html, body{
     /* justify-content: center; */
     align-items: center;
 }
+#window_header > div{
+
+    margin: 0px 5px;
+}
 
 #total {
     display: grid;
