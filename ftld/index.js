@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   databind.autobind()
 
   $('#btn_execute').click(on_click_execute)
+  $('#btn_swap').click(on_click_swap)
 
   setInterval(tick, 1000)
 })
@@ -107,5 +108,19 @@ function on_domain_result(is_avaliable, domain, whois, is_cache=false) {
 
 
 function tick() {
+
+}
+
+function on_click_swap() {
+
+  let pre = $('#prefix_data').val()
+  let post = $('#postfix_data').val()
+
+
+  $('#prefix_data').val(post)
+  $('#postfix_data').val(pre)
+
+  databind.triger('prefix_data')
+  databind.triger('postfix_data')
 
 }
