@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#btn_swap').click(on_click_swap)
 
   setInterval(tick, 1000)
+
+
+  $('#btn_gen_random').click(on_click_gen_random)
 })
 
 function open_win(win_name) {
@@ -123,4 +126,28 @@ function on_click_swap() {
   databind.triger('prefix_data')
   databind.triger('postfix_data')
 
+}
+
+function randomString(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+
+function on_click_gen_random() {
+  console.log('gen')
+  $('#random_list').empty()
+
+  let len = parseInt($('#num_len').val())
+
+  for(let i = 0; i < 3; i ++) {
+    let word = randomString(len, 'abcdefghijklmnopqrstuvwxyz')
+
+    $('#random_list').prepend(`
+    <div class="item">
+      ${word}.com
+    </div>
+    
+    `)
+  }
 }

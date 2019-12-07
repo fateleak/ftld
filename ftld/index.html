@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>FTLD beta</title>
+  <title>域名灵感房间</title>
 
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
   <!-- <link href="libs/iconfont.css" rel="stylesheet" /> -->
@@ -24,45 +24,72 @@
 </head>
 
 <body>
-  <div id="window_header" class="drag no-selection">
+  <style>
+    *{
+      background: rgb(198, 248, 124);
+    }
+    
+    </style>
+  <div id="box_a">
+    <div id="window_header" class="drag no-selection">
 
-    <div>
-      <button id="btn_swap">Swap</button>
-    </div>
-    <div>
-      <button id="btn_execute">Execute</button>
-    </div>
-    <div>
-      <a>Cache</a> <input type="checkbox" class="autobind" id="check_with_cache" dft="true" />
-    </div>
+      <div>
+        <button id="btn_swap">Swap</button>
+      </div>
+      <div>
+        <button id="btn_execute">Execute</button>
+      </div>
+      <div>
+        <a>Cache</a> <input type="checkbox" class="autobind" id="check_with_cache" dft="true" />
+      </div>
 
-    <div>
+      <div>
         <a>Show NA</a> <input type="checkbox" class="autobind" id="show_na" dft="true" />
-    </div>
-    <div>
-      <span id="msg"></span>
+      </div>
+      <div>
+        <span id="msg"></span>
+      </div>
+
+
     </div>
 
+    <div id="total">
+      <div id="prefix_area" class="input-column">
+        <textarea class="autobind" id="prefix_data" dft="fate">fate</textarea>
+      </div>
+
+      <div id="postfix_area" class="input-column">
+        <textarea class="autobind" id="postfix_data" dft="core">core</textarea>
+      </div>
+
+      <div id="tld_area" class="input-column">
+        <textarea class="autobind" id="tld_data" dft=".com">.com</textarea>
+      </div>
+
+      <div id="result_area"></div>
+    </div>
 
   </div>
 
-  <div id="total">
-    <div id="prefix_area" class="input-column">
-      <textarea class="autobind" id="prefix_data" dft="fate">fate</textarea>
+  <div id="box_b">
+    <style>
+      #random_list{
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      
+      .item{
+        padding: 5px;
+      }
+      
+      </style>
+    <button id="btn_gen_random">生成</button>
+    长度<input type="number" value="5" id="num_len" /> 
+    <div id="random_list">
+    sdfsd
     </div>
-
-    <div id="postfix_area" class="input-column">
-      <textarea class="autobind" id="postfix_data" dft="core">core</textarea>
-    </div>
-
-    <div id="tld_area" class="input-column">
-      <textarea class="autobind" id="tld_data" dft=".com">.com</textarea>
-    </div>
-
-    <div id="result_area"></div>
   </div>
-
-
   <script>
     require('./index.js')
   </script>

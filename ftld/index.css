@@ -22,8 +22,7 @@ a{
 body{
     background-color: rgb(255, 255, 255);
     display: grid;
-    grid-template-rows: auto 1fr;
-    font-family: 'Courier New', Courier, monospace;
+    grid-template-columns: 1fr 1fr;
 }
 
 html, body{
@@ -73,6 +72,6 @@ html, body{
 }
 
 #result_area{
-    overflow: scroll;
+    overflow: hidden;
     height: calc(100vh - 50px);
 }
